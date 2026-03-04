@@ -34,18 +34,10 @@ env/
 
 # Large data files (大文件 - 不上传)
 # Processed datasets
-SUIM_Processed/SUIM_Processed/1_raw/
-SUIM_Processed/SUIM_Processed/6_label/ann/
-USIS10K_Processed/USIS10K_Processed/1_raw/
-USIS10K_Processed/USIS10K_Processed/6_label/ann/
-UIIS10K_Processed/UIIS10K_Processed/1_raw/
-UIIS10K_Processed/UIIS10K_Processed/6_label/ann/
-EUVP_Processed/EUVP_Processed/*/1_raw/
-EUVP_Processed/EUVP_Processed/*/6_label/ann/
-
-# 保留生成的mask文件 (小文件)
-!SUIM_Processed/SUIM_Processed/6_label/masks/*.png
-!USIS10K_Processed/USIS10K_Processed/6_label/masks/*.png
+SUIM_Processed/
+USIS10K_Processed/
+EUVP_Processed/
+UIIS10K_Processed/
 
 # Output files
 output/
@@ -97,3 +89,7 @@ cython_debug/
 # UV package manager
 .python-version
 uv.lock
+
+# Other
+task.txt
+扩散模型+CLIP语义约束+全景分割/
