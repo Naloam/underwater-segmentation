@@ -24,23 +24,12 @@
 | CPU 推理速度 | 788 ms/image |
 | Jetson NX 预估 | 78.8 ms/image (12.7 FPS) |
 
-## 模型权重
-
-由于模型文件较大，未包含在本仓库中。请通过以下方式获取：
-
-### 方式1: 训练自己的模型
+### 训练自己的模型
 
 ```bash
 cd Part2_Enhanced
 python train.py --epochs 50 --batch_size 4
 ```
-
-### 方式2: 使用预训练模型
-
-| 模型 | 大小 | 下载链接 |
-|------|------|----------|
-| best_model.pth | 213MB | [百度网盘](链接) / [Google Drive](链接) |
-| model_quantized.pth | 57MB | [百度网盘](链接) / [Google Drive](链接) |
 
 下载后放置在对应目录：
 ```bash
