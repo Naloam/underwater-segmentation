@@ -25,26 +25,12 @@ env/
 # Claude Code
 .claude/
 
-# Model checkpoints (大文件 - 使用 Git LFS 或外部存储)
-*.pth
-*.pt
-*.onnx
-*.trt
-*.bin
-
 # Large data files (大文件 - 不上传)
 # Processed datasets
 SUIM_Processed/
 USIS10K_Processed/
 EUVP_Processed/
 UIIS10K_Processed/
-
-# Output files
-output/
-outputs/
-results/
-eval_results/
-demo_results/
 
 # Logs
 *.log

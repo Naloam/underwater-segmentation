@@ -100,32 +100,71 @@ source .venv/bin/activate  # Linux/Mac
 pip install torch torchvision numpy pillow matplotlib tqdm opencv-python scikit-learn einops
 ```
 
-### 训练模型
+## 所有可用命令
+
+### Part2: 模型训练与评估
 
 ```bash
+# 进入Part2目录
 cd Part2_Enhanced
-python train.py --epochs 50 --batch_size 4
+
+# 训练模型 (使用SUIM + USIS10K数据集)
+python train.py
+
+# 评估训练好的模型
+python evaluate.py
+
+# 测试模型配置
+python configs/model_config.py
 ```
 
-### 评估模型
+### Part3: 部署与可视化
 
 ```bash
-cd Part2_Enhanced
-python evaluate.py --checkpoint checkpoints/best_model.pth
-```
-
-### 运行Demo
-
-```bash
+# 进入Demo目录
 cd Part3_Deployment_Demo
+
+# CLI Demo - 生成可视化对比图
 python demo_cli.py
+
+# 生成所有图表 (柱状图、热力图、灵敏度曲线、可视化对比)
+python generate_all_charts.py
+
+# PyQt5 GUI Demo (图形界面)
+python main.py gui
+
+# 运行性能测试
+python main.py benchmark
+
+# 嵌入式部署模拟
+python main.py simulate
 ```
 
-### 模型轻量化
+### Part3: 模型轻量化
 
 ```bash
+# 进入轻量化目录
 cd Part3_Lightweight
+
+# 生成轻量化报告 (量化、剪枝)
 python generate_report.py
+
+# 运行完整轻量化流程
+python run_lightweight.py
+```
+
+### Part1: 数据集处理
+
+```bash
+# 处理SUIM数据集
+cd Part1_DataProcessing
+python process_suim.py --input "path/to/SUIM" --output "SUIM_Processed"
+
+# 处理USIS10K数据集
+python process_usis10k.py --input "path/to/USIS10K" --output "USIS10K_Processed"
+
+# 处理UIIS10K数据集
+python process_uiis10k.py --input "path/to/UIIS10K" --output "UIIS10K_Processed"
 ```
 
 ## 数据集
@@ -184,6 +223,56 @@ Input [3, 256, 256]
               Output [8, H, W]
 ```
 
+## 详细命令参考
+
+### Part2_Enhanced 命令
+
+| 命令 | 说明 |
+|------|------|
+| `python train.py` | 训练分割模型 (50 epochs, batch_size=4) |
+| `python evaluate.py` | 评估模型并生成报告和可视化 |
+| `python configs/model_config.py` | 测试模型配置 |
+
+**输出文件**:
+- `checkpoints/best_model.pth` - 最佳模型权重
+- `logs/` - 训练日志
+- `eval_results/` - 评估结果 (包含可视化对比图)
+
+### Part3_Deployment_Demo 命令
+
+| 命令 | 说明 |
+|------|------|
+| `python demo_cli.py` | CLI Demo: 生成图像分割对比图 |
+| `python generate_all_charts.py` | 生成所有分析图表和报告 |
+| `python main.py gui` | PyQt5 图形界面Demo |
+| `python main.py benchmark` | 运行性能基准测试 |
+| `python main.py simulate` | 嵌入式部署模拟 |
+
+**输出文件**:
+- `output/charts/` - 模型对比柱状图、误差热力图、灵敏度曲线
+- `output/comparisons/` - 原始图像 vs 分割结果对比图
+- `output/experiment_report.md` - 完整实验报告
+
+### Part3_Lightweight 命令
+
+| 命令 | 说明 |
+|------|------|
+| `python generate_report.py` | 生成轻量化报告 (量化、剪枝分析) |
+| `python run_lightweight.py` | 运行完整轻量化流程 |
+
+**输出文件**:
+- `results/LIGHTWEIGHT_REPORT.md` - 模型优化报告
+- `results/quantized/` - 量化后的模型
+
+### part2 命令 (原始模型)
+
+| 命令 | 说明 |
+|------|------|
+| `python main.py` | 训练基础 CNN+CBAM 模型 |
+
+**输出文件**:
+- `best_model.pth` - 模型权重 (213MB)
+
 ## 部署指南
 
 ### Jetson Xavier NX 部署
@@ -205,23 +294,3 @@ python infer_tensorrt.py --engine model.trt --input image.jpg
 |------|----------|-----|
 | CPU (x86) | 788 ms | 1.3 |
 | Jetson NX GPU | 78.8 ms | 12.7 |
-
-## 贡献者
-
-- 项目团队: 大创项目组
-- 指导教师: [待补充]
-
-## 许可证
-
-MIT License
-
-## 致谢
-
-- SUIM Dataset: [https://github.com/Xiaoyu-BMI/SUIM-Net](https://github.com/Xiaoyu-BMI/SUIM-Net)
-- USIS10K Dataset: [https://github.com/HzFu/Underwater_Semantic_Segmentation](https://github.com/HzFu/Underwater_Semantic_Segmentation)
-- CLIP: OpenAI
-
-## 联系方式
-
-- 项目地址: [GitHub URL]
-- 问题反馈: [Issues]

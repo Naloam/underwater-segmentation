@@ -65,7 +65,7 @@ class TrainingConfig:
     # 训练参数
     batch_size: int = 4
     num_workers: int = 4
-    epochs: int = 50
+    epochs: int = 3
     learning_rate: float = 1e-4
     weight_decay: float = 1e-4
 

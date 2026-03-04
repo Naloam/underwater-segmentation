@@ -130,10 +130,10 @@ class ConfigLoader:
         default_configs = {
             "segmentation": {
                 "use_mock": False,
-                "model_type": "enhanced",  # 使用增强模型
+                "model_type": "segmodel",  # 使用基础模型
                 "num_classes": 8,
                 "input_size": [256, 256],
-                "weight_path": "../Part2_Enhanced/checkpoints/best_model.pth",
+                "weight_path": "checkpoints/trained/segmodel_best.pth",
                 "device": device
             },
             "enhancement": {
@@ -142,9 +142,9 @@ class ConfigLoader:
             },
             "pipeline": {
                 "use_mock": False,
-                "model_type": "enhanced",
+                "model_type": "segmodel",
                 "num_classes": 8,
-                "weight_path": "../Part2_Enhanced/checkpoints/best_model.pth",
+                "weight_path": "checkpoints/trained/segmodel_best.pth",
                 "device": device
             }
         }

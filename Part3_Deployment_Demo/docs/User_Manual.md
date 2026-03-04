@@ -93,22 +93,3 @@ python main.py simulate
 ```bash
 python main.py test
 ```
-
-## 开发状态
-
-- ✅ 共享模块
-- ✅ 数据可视化模块
-- ✅ 模型轻量化框架
-- ✅ 嵌入式部署模拟器
-- ✅ PyQt5 Demo
-- ⏳ 等待第二部分模型完成
-
-## 依赖关系
-
-本模块依赖于：
-- 第一部分：处理好的数据集（SUIM, USIS10K, EUVP, UIIS10K）
-- 第二部分：训练好的Mask2Former模型
-
-## 联系方式
-
-- 第三部分负责人

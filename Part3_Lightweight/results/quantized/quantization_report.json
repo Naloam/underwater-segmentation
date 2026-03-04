@@ -1,0 +1,26 @@
+{
+  "quantization": {
+    "method": "dynamic_int8",
+    "device": "cpu"
+  },
+  "original_model": {
+    "size_mb": 72.89,
+    "params": 19102096,
+    "inference_ms": 770.95,
+    "fps": 1.3
+  },
+  "quantized_model": {
+    "size_mb": 50.92,
+    "params": 13344400,
+    "inference_ms": 787.95,
+    "fps": 1.27
+  },
+  "improvements": {
+    "compression_percent": 30.1,
+    "speedup": 0.98
+  },
+  "accuracy": {
+    "max_diff": 0.387721,
+    "mean_diff": 0.032605
+  }
+}
