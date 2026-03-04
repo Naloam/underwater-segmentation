@@ -1,0 +1,26 @@
+# 浅海珊瑚礁场景配置
+scene: 浅海珊瑚礁
+description: 适用于浅水环境，光线充足，色彩丰富
+
+# 图像增强配置
+enhancement:
+  method: clahe
+  params:
+    clip_limit: 2.0
+    tile_grid_size: [8, 8]
+
+# 分割配置
+segmentation:
+  confidence_threshold: 0.7
+  target_classes: [5, 6]
+  min_region_size: 100
+
+# 性能配置
+performance:
+  target_fps: 15
+  input_size: [256, 256]
+
+# 可视化配置
+visualization:
+  show_confidence: true
+  overlay_alpha: 0.5

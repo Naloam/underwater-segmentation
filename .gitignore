@@ -1,0 +1,99 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+*.virtualenv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code
+.claude/
+
+# Model checkpoints (大文件 - 使用 Git LFS 或外部存储)
+*.pth
+*.pt
+*.onnx
+*.trt
+*.bin
+
+# Large data files (大文件 - 不上传)
+# Processed datasets
+SUIM_Processed/SUIM_Processed/1_raw/
+SUIM_Processed/SUIM_Processed/6_label/ann/
+USIS10K_Processed/USIS10K_Processed/1_raw/
+USIS10K_Processed/USIS10K_Processed/6_label/ann/
+UIIS10K_Processed/UIIS10K_Processed/1_raw/
+UIIS10K_Processed/UIIS10K_Processed/6_label/ann/
+EUVP_Processed/EUVP_Processed/*/1_raw/
+EUVP_Processed/EUVP_Processed/*/6_label/ann/
+
+# 保留生成的mask文件 (小文件)
+!SUIM_Processed/SUIM_Processed/6_label/masks/*.png
+!USIS10K_Processed/USIS10K_Processed/6_label/masks/*.png
+
+# Output files
+output/
+outputs/
+results/
+eval_results/
+demo_results/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+.hypothesis/
+
+# Documentation builds
+docs/_build/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# Pytype
+.pytype/
+
+# Cython
+cython_debug/
+
+# UV package manager
+.python-version
+uv.lock

@@ -1,0 +1,26 @@
+# 海洋生物监测场景配置
+scene: 海洋生物监测
+description: 动态场景，需要高帧率
+
+# 图像增强配置
+enhancement:
+  method: clahe
+  params:
+    clip_limit: 2.5
+    tile_grid_size: [4, 4]
+
+# 分割配置
+segmentation:
+  confidence_threshold: 0.7
+  target_classes: [1, 6]
+  min_region_size: 50
+
+# 性能配置
+performance:
+  target_fps: 30
+  input_size: [256, 256]
+
+# 可视化配置
+visualization:
+  show_confidence: true
+  overlay_alpha: 0.4
