@@ -108,6 +108,11 @@ class UnderwaterDataset(Dataset):
         image = torch.from_numpy(np.array(image)).permute(2, 0, 1).float() / 255.0
         label = torch.from_numpy(np.array(label)).long()
 
+        # ImageNet归一化
+        mean = torch.tensor([0.485, 0.456, 0.406]).view(3, 1, 1)
+        std = torch.tensor([0.229, 0.224, 0.225]).view(3, 1, 1)
+        image = (image - mean) / std
+
         # 应用变换
         if self.transform:
             image, label = self.transform(image, label)

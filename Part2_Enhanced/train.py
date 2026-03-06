@@ -322,7 +322,6 @@ def main():
     print("[Data] Creating dataloaders...")
     train_loader, val_loader = create_dataloaders(
         train_paths=[
-            os.path.join(train_cfg.data_root, "SUIM_Processed/SUIM_Processed"),
             os.path.join(train_cfg.data_root, "USIS10K_Processed/USIS10K_Processed")
         ],
         val_path=os.path.join(train_cfg.data_root, "SUIM_Processed/SUIM_Processed"),

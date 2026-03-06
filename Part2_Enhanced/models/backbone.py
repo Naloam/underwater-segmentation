@@ -65,11 +65,12 @@ class PyramidPoolModule(nn.Module):
         self.pool_channels = in_channels // len(pool_scales)
 
         for scale in pool_scales:
+            num_groups = min(self.pool_channels, 32)
             self.stages.append(
                 nn.Sequential(
                     nn.AdaptiveAvgPool2d(scale),
                     nn.Conv2d(in_channels, self.pool_channels, 1, bias=False),
-                    nn.BatchNorm2d(self.pool_channels),
+                    nn.GroupNorm(num_groups, self.pool_channels),
                     nn.ReLU(inplace=True)
                 )
             )

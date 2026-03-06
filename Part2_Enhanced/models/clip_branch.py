@@ -82,12 +82,14 @@ class CLIPSemanticBranch(nn.Module):
         if not self._is_loaded:
             self._load_clip()
 
-        # 确保 fallback 模型在正确的设备上
-        if not hasattr(self.clip_model, 'vision_model'):
-            device = x.device
+        # 确保所有子模块在正确的设备上
+        device = x.device
+        if hasattr(self.clip_model, 'vision_model'):
             self.clip_model = self.clip_model.to(device)
-            self.proj = self.proj.to(device)
-            self.norm = self.norm.to(device)
+        else:
+            self.clip_model = self.clip_model.to(device)
+        self.proj = self.proj.to(device)
+        self.norm = self.norm.to(device)
 
         B, C, H, W = x.shape
 

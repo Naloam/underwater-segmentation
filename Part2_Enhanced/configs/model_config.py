@@ -56,7 +56,6 @@ class TrainingConfig:
     # 数据路径
     data_root: str = r"D:\myProjects\大创(1)"
     train_datasets: List[str] = field(default_factory=lambda: [
-        "SUIM_Processed/SUIM_Processed",
         "USIS10K_Processed/USIS10K_Processed"
     ])
     val_dataset: str = "SUIM_Processed/SUIM_Processed"
@@ -65,7 +64,7 @@ class TrainingConfig:
     # 训练参数
     batch_size: int = 4
     num_workers: int = 4
-    epochs: int = 3
+    epochs: int = 50
     learning_rate: float = 1e-4
     weight_decay: float = 1e-4
 
