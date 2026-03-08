@@ -79,3 +79,7 @@ uv.lock
 # Other
 task.txt
 扩散模型+CLIP语义约束+全景分割/
+Part2_Enhanced/output/checkpoint_epoch_5.pth
+Part2_Enhanced/output/checkpoint_epoch_10.pth
+Part2_Enhanced/output/checkpoint_epoch_15.pth
+Part2_Enhanced/output/checkpoint_epoch_20.pth

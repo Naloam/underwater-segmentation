@@ -152,38 +152,53 @@ def compute_metrics(
 
 
 class MetricTracker:
-    """指标跟踪器"""
+    """基于全局混淆矩阵的指标跟踪器"""
     def __init__(self, num_classes: int):
         self.num_classes = num_classes
         self.reset()
 
     def reset(self):
-        """重置所有指标"""
-        self.total_metrics = defaultdict(float)
-        self.count = 0
+        """重置混淆矩阵"""
+        self.confusion_matrix = np.zeros((self.num_classes, self.num_classes), dtype=np.int64)
 
     def update(self, preds: torch.Tensor, targets: torch.Tensor):
-        """更新指标"""
-        metrics = compute_metrics(preds, targets, self.num_classes)
-
-        for k, v in metrics.items():
-            self.total_metrics[k] += v
-
-        self.count += 1
+        """累积混淆矩阵"""
+        pred_flat = preds.flatten().numpy().astype(np.int64)
+        target_flat = targets.flatten().numpy().astype(np.int64)
+        mask = (target_flat >= 0) & (target_flat < self.num_classes) & \
+               (pred_flat >= 0) & (pred_flat < self.num_classes)
+        self.confusion_matrix += np.bincount(
+            target_flat[mask] * self.num_classes + pred_flat[mask],
+            minlength=self.num_classes ** 2
+        ).reshape(self.num_classes, self.num_classes)
 
     def get_average(self) -> Dict[str, float]:
-        """获取平均指标"""
-        return {k: v / self.count for k, v in self.total_metrics.items()}
+        """从全局混淆矩阵计算指标"""
+        cm = self.confusion_matrix
+        intersection = np.diag(cm)
+        union = cm.sum(axis=1) + cm.sum(axis=0) - intersection
+        iou_per_class = np.where(union > 0, intersection / union, 0.0)
+        valid = union > 0
+        miou = float(iou_per_class[valid].mean()) if valid.any() else 0.0
+        accuracy = float(intersection.sum() / cm.sum()) if cm.sum() > 0 else 0.0
+        # macro F1
+        precision = np.where(cm.sum(axis=0) > 0, intersection / cm.sum(axis=0), 0.0)
+        recall = np.where(cm.sum(axis=1) > 0, intersection / cm.sum(axis=1), 0.0)
+        f1_cls = np.where(precision + recall > 0, 2 * precision * recall / (precision + recall), 0.0)
+        f1 = float(f1_cls[valid].mean()) if valid.any() else 0.0
+
+        metrics = {'miou': miou, 'accuracy': accuracy, 'f1': f1}
+        for i in range(self.num_classes):
+            metrics[f'iou_class_{i}'] = float(iou_per_class[i])
+        return metrics
 
     def get_summary(self) -> str:
         """获取指标摘要"""
         avg_metrics = self.get_average()
-
         summary = []
         summary.append(f"mIoU: {avg_metrics['miou']:.4f}")
         summary.append(f"Accuracy: {avg_metrics['accuracy']:.4f}")
         summary.append(f"F1: {avg_metrics['f1']:.4f}")
-
         return ", ".join(summary)
 
 

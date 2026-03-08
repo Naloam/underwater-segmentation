@@ -267,6 +267,9 @@ class FeatureFusionNeck(nn.Module):
 
         self.use_clip = use_clip
         self.use_diffusion = use_diffusion
+        self.semantic_dim = semantic_dim
+        self.diffusion_dim = diffusion_dim
+        self.out_dim = out_dim
 
         # 维度投影
         self.visual_projs = nn.ModuleList([
@@ -306,7 +309,7 @@ class FeatureFusionNeck(nn.Module):
 
         # 准备语义和扩散特征
         semantic = semantic_feat if self.use_clip else torch.zeros(
-            visual_proj[0].shape[0], self.multiscale_fusion.fusion_modules[0].semantic_dim,
+            visual_proj[0].shape[0], self.semantic_dim,
             device=visual_proj[0].device
         )
 
